@@ -233,10 +233,7 @@ class Controller {
         res.send(err);
       });
   }
-  static handleLogout(req, res) {
-    req.session.destroy();
-    res.redirect("/users/login");
-  }
+  // home user
   static renderHomeUser(req, res) {
     const hour = new Date().getHours();
 
@@ -271,6 +268,10 @@ class Controller {
       .catch((err) => {
         res.send(err);
       });
+  }
+  static handleLogout(req, res) {
+    req.session.destroy();
+    res.redirect("/users/login");
   }
 }
 

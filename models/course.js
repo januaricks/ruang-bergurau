@@ -1,7 +1,5 @@
-'use strict';
-const {
-  Model
-} = require('sequelize');
+"use strict";
+const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
   class Course extends Model {
     /**
@@ -11,18 +9,57 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      this.belongsTo(models.User)
-      this.belongsTo(models.Category)
+      this.belongsTo(models.User);
+      this.belongsTo(models.Category);
     }
   }
-  Course.init({
-    course_name: DataTypes.STRING,
-    description: DataTypes.TEXT,
-    course_imageUrl: DataTypes.STRING,
-    CategoryId: DataTypes.INTEGER
-  }, {
-    sequelize,
-    modelName: 'Course',
-  });
+  Course.init(
+    {
+      course_name: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate: {
+          notEmpty: {
+            msg: `Course cannot be empty`,
+          },
+          notNull: {
+            msg: `Course a required`,
+          },
+        },
+      },
+      description: {
+        type: DataTypes.TEXT,
+        allowNull: false,
+        validate: {
+          notEmpty: {
+            msg: `description cannot be empty`,
+          },
+          notNull: {
+            msg: `description a required`,
+          },
+        },
+      },
+      course_imageUrl: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate: {
+          notEmpty: {
+            msg: `imageUrl cannot be empty`,
+          },
+          notNull: {
+            msg: `imageUrl a required`,
+          },
+        },
+      },
+      CategoryId: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+      },
+    },
+    {
+      sequelize,
+      modelName: "Course",
+    }
+  );
   return Course;
 };
