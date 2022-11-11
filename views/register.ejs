@@ -24,6 +24,13 @@
             Register Account
           </h5>
           <div style="margin: 20px auto 20px auto; max-width: 470px">
+            <% if (error) { %>
+            <ul style="color: red">
+              <% error.split(",").forEach((item) => { %>
+              <li><%= item %></li>
+              <% }) %>
+            </ul>
+            <% } %>
             <form action="/users/register" method="post">
               <div class="mb-3">
                 <label class="form-label">Username</label>

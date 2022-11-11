@@ -1,8 +1,8 @@
-const {User, Profile, Category, Course} = require('../models')
+const { User, Profile, Category, Course } = require("../models");
 const { Op } = require("sequelize");
-const {categoryAbbrev} = require("../helper/helpers")
+const { categoryAbbrev } = require("../helper/helpers");
 const bcrypt = require("bcryptjs");
-const greet = require("greet-by-time")
+const greet = require("greet-by-time");
 
 class Controller {
   static redirectLogin(req, res) {
@@ -16,6 +16,7 @@ class Controller {
   }
   static submitLogin(req, res) {
     const { email, password } = req.body;
+
     User.findOne({ where: { email } })
       .then((data) => {
         if (data) {
@@ -44,7 +45,8 @@ class Controller {
 
   // register
   static renderRegister(req, res) {
-    res.render("register");
+    const { error } = req.query;
+    res.render("register", { error });
   }
   static submitRegister(req, res) {
     const { username, email, password, last_education } = req.body;
@@ -62,7 +64,14 @@ class Controller {
       .then(() => {
         res.redirect("/users/login");
       })
-      .catch((err) => res.send(err));
+      .catch((err) => {
+        if (err.name === "SequelizeValidationError") {
+          let error = err.errors.map((item) => {
+            return item.message;
+          });
+          res.redirect(`/users/register?error=${error}`);
+        }
+      });
   }
   // end register
 
@@ -229,6 +238,8 @@ class Controller {
     res.redirect("/users/login");
   }
   static renderHomeUser(req, res) {
+    const hour = new Date().getHours();
+
     let courseData;
     let { search } = req.query;
 
@@ -239,7 +250,7 @@ class Controller {
         course_name: { [Op.iLike]: `%${search}%` },
       };
     }
-    const hour = new Date().getHours()
+
     Course.findAll({
       include: Category,
       where: option,
@@ -249,17 +260,15 @@ class Controller {
         return Profile.findAll();
       })
       .then((pData) => {
-        let greeting = greet('Bro', hour)
+        let greeting = greet("Bro!", hour);
         res.render("userhomepage", {
           courses: courseData,
           profiles: pData,
           categoryAbbrev,
-          greeting
+          greeting,
         });
       })
       .catch((err) => {
-        console.log(err);
-
         res.send(err);
       });
   }

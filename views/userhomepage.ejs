@@ -1,54 +1,47 @@
-<%- include('./partials/header.ejs') %> 
-
+<%- include('./partials/header.ejs') %>
 <%= greeting %>
 
 <h1>HALAMAN USER</h1>
 
 <form action="/users" method="get">
-    SEARCH <input type="text" name="search">
-    <input type="submit">
+  SEARCH <input type="text" name="search" />
+  <input type="submit" />
 </form>
-<br><br>
+<br /><br />
 
 <h3>TABEL COURSE</h3>
 <table>
-    <tr>
-        <th>NO</th>
-        <th>NAME</th>
-        <th>IMGURL</th>
-        <th>CATEGORY</th>
-        <th>TEACHERS</th>
-        <th>ACTION</th>
-    </tr>
-    <% courses.forEach((course, index) => { %>
-    <tr>
-        <td><%= index + 1 %></td>
-        <td><%= course.course_name %></td>
-        <td><img src="<%= course.course_imageUrl %>" style="width: 150px;"></td>
-        <td><%= categoryAbbrev(course.Category.category_name) %></td>
+  <tr>
+    <th>NO</th>
+    <th>NAME</th>
+    <th>IMGURL</th>
+    <th>CATEGORY</th>
+    <th>TEACHERS</th>
+    <th>ACTION</th>
+  </tr>
+  <% courses.forEach((course, index) => { %>
+  <tr>
+    <td><%= index + 1 %></td>
+    <td><%= course.course_name %></td>
+    <td><img src="<%= course.course_imageUrl %>" style="width: 150px" /></td>
+    <td><%= categoryAbbrev(course.Category.category_name) %></td>
 
-        <% if (course.UserId) { %>
-            <% profiles.forEach(el => { %>
-                <% if (course.UserId === el.UserId) { %>
-                 <td><%= el.username %></td>
-                <% } %>
-            <% }) %>
-            <td><button disabled>BIMBING KELAS INI</button></td>
-            <% } else { %>
-                <td>TEACHERS EMPTY</td>
-                <td>
-                    <a href="/users/<%= course.UserId %>/course/<%= course.id %>/joinclass">
-                        <button>BIMBING KELAS INI</button>
-                    </a>
-                </td>
-        <% } %>
-        
-
-
-        
-    </tr>
-    <% }) %>
+    <% if (course.UserId) { %> <% profiles.forEach(el => { %> <% if
+    (course.UserId === el.UserId) { %>
+    <td><%= el.username %></td>
+    <% } %> <% }) %>
+    <td><button disabled>BIMBING KELAS INI</button></td>
+    <% } else { %>
+    <td>TEACHERS EMPTY</td>
+    <td>
+      <a href="/users/<%= course.UserId %>/course/<%= course.id %>/joinclass">
+        <button>BIMBING KELAS INI</button>
+      </a>
+    </td>
+    <% } %>
+  </tr>
+  <% }) %>
 </table>
 
-<br><br>
-<%- include('./partials/footer.ejs') %> 
+<br /><br />
+<%- include('./partials/footer.ejs') %>
