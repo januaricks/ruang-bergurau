@@ -2,6 +2,7 @@ const {User, Profile, Category, Course} = require('../models')
 const { Op } = require("sequelize");
 const {categoryAbbrev} = require("../helper/helpers")
 const bcrypt = require("bcryptjs");
+const greet = require("greet-by-time")
 
 class Controller {
   static redirectLogin(req, res) {
@@ -238,7 +239,7 @@ class Controller {
         course_name: { [Op.iLike]: `%${search}%` },
       };
     }
-
+    const hour = new Date().getHours()
     Course.findAll({
       include: Category,
       where: option,
@@ -248,10 +249,12 @@ class Controller {
         return Profile.findAll();
       })
       .then((pData) => {
+        let greeting = greet('Bro', hour)
         res.render("userhomepage", {
           courses: courseData,
           profiles: pData,
           categoryAbbrev,
+          greeting
         });
       })
       .catch((err) => {
