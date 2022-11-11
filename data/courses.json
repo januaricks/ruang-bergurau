@@ -1,0 +1,21 @@
+[
+    {
+        "course_name": "BELAJAR MATEMATIKA ITU MENYENANGKAN BUKAN ?",
+        "description" : "Uraaaaaa Uraaaaaa Uraaaaaa Uraaaaaa Uraaaaaa",
+        "course_imageUrl" : "https://webcdn.prodigygame.com/d445deb-1104/static/d2be85e3ca5e73f924b31837016864fd/faf0b/b7adbb15-ca43-4f71-8546-adb1653f3aa2_christmas-math-jokes.jpg",
+        "CategoryId" : 1
+    },
+    {
+        "course_name": "BELAJAR EKONOMI ITU MENYENANGKAN BUKAN ?",
+        "description" : "Uraaaaaa Uraaaaaa Uraaaaaa Uraaaaaa Uraaaaaa",
+        "course_imageUrl" : "https://webcdn.prodigygame.com/d445deb-1104/static/d2be85e3ca5e73f924b31837016864fd/faf0b/b7adbb15-ca43-4f71-8546-adb1653f3aa2_christmas-math-jokes.jpg",
+        "CategoryId" : 2
+    },
+    {
+        "course_name": "BELAJAR TEKNOLOGI ITU MENYENANGKAN BUKAN ?",
+        "description" : "Uraaaaaa Uraaaaaa Uraaaaaa Uraaaaaa Uraaaaaa",
+        "course_imageUrl" : "https://webcdn.prodigygame.com/d445deb-1104/static/d2be85e3ca5e73f924b31837016864fd/faf0b/b7adbb15-ca43-4f71-8546-adb1653f3aa2_christmas-math-jokes.jpg",
+        "CategoryId" : 4
+    }
+]
+
